@@ -14,8 +14,7 @@
 
 * 適当なディレクトリにレポジトリをクローンする
 * ディレクトリに対しての設定
-  * CGIを有効にする
-  * `common/`ディレクトリを読み取り禁止にする
+  * `httpd`ディレクトリをサーバで公開してCGIを有効にする
 * `common/siteconfig.json`を作成する
 * github webhookに`githook.cgi`の公開URLを設定する
 

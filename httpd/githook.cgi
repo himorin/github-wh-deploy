@@ -33,7 +33,7 @@ close(FILE);
 
 if ($ENV{'X-GitHub-Event'} ne 'push') {
   print $obj_cgi->header();
-  print "{\"response\": \"ok\"}";
+  print "{\"response\": \"no action: not 'push'\"}";
 }
 
 # extract commit information
@@ -57,6 +57,7 @@ foreach (@{$obj_config->get('targets')}) {
     open(P_GIT, "git pull |");
     while (readline(P_GIT)) { $p_git_out .= $_ . "\n"; }
     close(P_GIT);
+    my $p_git_close = $?;
     chdir $c_cwd;
     open(FILE, ">$r_hash.out");
     print FILE $p_git_out;
@@ -65,7 +66,12 @@ foreach (@{$obj_config->get('targets')}) {
   last;
 }
 
-print $obj_cgi->header();
-print "{\"response\": \"ok\"}";
+if ($p_git_close != 0) {
+  print $obj_cgi->header();
+  print "{\"response\": \"error code $p_git_close ; check $r_hash \"}";
+} else {
+  print $obj_cgi->header();
+  print "{\"response\": \"ok\"}";
+}
 
 exit;

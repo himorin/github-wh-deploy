@@ -48,6 +48,7 @@ $gc->{'hash_before'} = $cdat->{'before'};
 $gc->{'hash_after'} = $cdat->{'after'};
 
 # match with config - for DB, just query by SELECT
+my $p_git_close = undef;
 foreach (@{$obj_config->get('targets')}) {
   if (($_->{'repo'} eq $gc->{'name'}) && ($_->{'branch'} eq $gc->{'branch'})) {
     # git command - XXX find better solution?
@@ -57,7 +58,7 @@ foreach (@{$obj_config->get('targets')}) {
     open(P_GIT, "git pull |");
     while (readline(P_GIT)) { $p_git_out .= $_ . "\n"; }
     close(P_GIT);
-    my $p_git_close = $?;
+    $p_git_close = $?;
     chdir $c_cwd;
     open(FILE, ">$r_hash.out");
     print FILE $p_git_out;
@@ -66,7 +67,10 @@ foreach (@{$obj_config->get('targets')}) {
   last;
 }
 
-if ($p_git_close != 0) {
+if (! defined($p_git_close)) {
+  print $obj_cgi->header();
+  print "{\"response\": \"no action taken, no match ref/branch found\"}";
+} elif ($p_git_close != 0) {
   print $obj_cgi->header();
   print "{\"response\": \"error code $p_git_close ; check $r_hash \"}";
 } else {

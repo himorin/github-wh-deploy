@@ -70,7 +70,7 @@ foreach (@{$obj_config->get('targets')}) {
 if (! defined($p_git_close)) {
   print $obj_cgi->header();
   print "{\"response\": \"no action taken, no match ref/branch found\"}";
-} elif ($p_git_close != 0) {
+} elsif ($p_git_close != 0) {
   print $obj_cgi->header();
   print "{\"response\": \"error code $p_git_close ; check $r_hash \"}";
 } else {

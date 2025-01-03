@@ -9,7 +9,6 @@
 * 将来拡張？
   * 管理系・ログ系のデータのデータベース化
 
-
 ## 導入・設定
 
 * 適当なディレクトリにレポジトリをクローンする
@@ -21,6 +20,7 @@
   * `content-type`は`application/json`に設定する
   * `push event`をターゲットで選択する
   * `secret`は不要
+* `common/ghwh`ディレクトリをhttpdから書き込めるように用意、一時的デバッグ用のjson保存領域
 
 ### siteconfig.json
 

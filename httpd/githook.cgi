@@ -4,6 +4,7 @@ use strict;
 use lib '../';
 
 use Encode;
+use JSON;
 use Cwd;
 
 use PNAPI::Constants;

@@ -17,6 +17,10 @@
   * `httpd`ディレクトリをサーバで公開してCGIを有効にする
 * `common/siteconfig.json`を作成する
 * github webhookに`githook.cgi`の公開URLを設定する
+  * URLの設定
+  * `content-type`は`application/json`に設定する
+  * `push event`をターゲットで選択する
+  * `secret`は不要
 
 ### siteconfig.json
 

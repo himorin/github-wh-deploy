@@ -48,7 +48,7 @@ $gc->{'hash_before'} = $cdat->{'before'};
 $gc->{'hash_after'} = $cdat->{'after'};
 
 # match with config - for DB, just query by SELECT
-foreach (@{$obj_config->{'targets'}}) {
+foreach (@{$obj_config->get('targets')}) {
   if (($_->{'repo'} eq $gc->{'name'}) && ($_->{'branch'} eq $gc->{'branch'})) {
     # git command - XXX find better solution?
     my $c_cwd = getcwd();

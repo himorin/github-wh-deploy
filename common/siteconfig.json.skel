@@ -1,0 +1,11 @@
+{
+  "targets": [
+    {
+      "repo": "himorin/github-wh-deploy",
+      "branch": "main";
+      "target": "some-directory-to-update",
+      "memo": "some note for this entry",
+      "url": "https://external-service-point"
+    }
+  ]
+}

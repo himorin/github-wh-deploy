@@ -31,7 +31,7 @@ open(FILE, ">$r_hash.json");
 print FILE $postdata;
 close(FILE);
 
-if ($ENV{'HTTP_X-GitHub-Event'} ne 'push') {
+if ($ENV{'HTTP_X_GitHub_Event'} ne 'push') {
   print $obj_cgi->header();
   print "{\"response\": \"no action: not 'push'\"}";
   exit;

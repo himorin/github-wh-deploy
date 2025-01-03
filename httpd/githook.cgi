@@ -31,9 +31,10 @@ open(FILE, ">$r_hash.json");
 print FILE $postdata;
 close(FILE);
 
-if ($ENV{'X-GitHub-Event'} ne 'push') {
+if ($ENV{'HTTP_X-GitHub-Event'} ne 'push') {
   print $obj_cgi->header();
   print "{\"response\": \"no action: not 'push'\"}";
+  exit;
 }
 
 # extract commit information

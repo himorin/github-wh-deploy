@@ -83,7 +83,7 @@ sub LOCATIONS {
     # detaint
     $inspath =~ /(.*)/;
     $inspath = $1;
-    if ($inspath eq '.') {
+    if (($inspath eq '.') || ($inspath eq '..')) {
        $inspath = getcwd();
     }
     return {

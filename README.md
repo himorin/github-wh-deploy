@@ -24,6 +24,7 @@
     * write accessは設定しないこと
     * ターゲットレポジトリがprivateな場合、位？
     * 将来的にはデータベースから一時ファイル作って`GIT_SSH_COMMAND`で設定するようにしたい
+  * サーバ上のcloneのディレクトリはhttpdの権限に設定する
 * `common/ghwh`ディレクトリをhttpdから書き込めるように用意、一時的デバッグ用のjson保存領域
 
 ### siteconfig.json

@@ -25,9 +25,9 @@ utf8::encode($postdata);
 my $cdat = decode_json($postdata);
 
 # for temporal debug and develop purpose
-my $hash = $ENV{'HTTP_X_GITHUB_DELIVERY'};
-$hash = PNAPI::Constants::LOCATIONS()->{'config'} . '/ghwh/' . $hash . '.json';
-open(FILE, ">$hash");
+my $r_hash = $ENV{'HTTP_X_GITHUB_DELIVERY'};
+$r_hash = PNAPI::Constants::LOCATIONS()->{'config'} . '/ghwh/' . $r_hash;
+open(FILE, ">$r_hash.json");
 print FILE $postdata;
 close(FILE);
 
@@ -53,7 +53,14 @@ foreach (@{$obj_config->get('targets')}) {
     # git command - XXX find better solution?
     my $c_cwd = getcwd();
     chdir $_->{'target'};
+    my $p_git_out;
+    open(P_GIT, "git pull |");
+    while (readline(P_GIT)) { $p_git_out .= $_ . "\n"; }
+    close(P_GIT);
     chdir $c_cwd;
+    open(FILE, ">$r_hash.out");
+    print FILE $p_git_out;
+    close(FILE);
   }
   last;
 }

@@ -22,7 +22,7 @@ if ($obj_cgi->request_method() ne 'POST') {
 
 my $postdata = $obj_cgi->param('POSTDATA');
 utf8::encode($postdata);
-my $cdat = decode_json $postdata;
+my $cdat = decode_json($postdata);
 
 # for temporal debug and develop purpose
 my $hash = $ENV{'HTTP_X_GITHUB_DELIVERY'};
@@ -30,6 +30,11 @@ $hash = PNAPI::Constants::LOCATIONS()->{'config'} . '/ghwh/' . $hash . '.json';
 open(FILE, ">$hash");
 print FILE $postdata;
 close(FILE);
+
+if ($ENV{'X-GitHub-Event'} ne 'push') {
+  print $obj_cgi->header();
+  print "{\"response\": \"ok\"}";
+}
 
 # extract commit information
 my $gc = {};

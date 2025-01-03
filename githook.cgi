@@ -26,7 +26,7 @@ my $cdat = decode_json $postdata;
 
 
 
-print $cgi->header();
+print $obj_cgi->header();
 print "{\"response\": \"ok\"}";
 
 exit;

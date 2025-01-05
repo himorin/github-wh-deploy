@@ -64,8 +64,8 @@ foreach (@{$obj_config->get('targets')}) {
     open(FILE, ">$r_hash.out");
     print FILE $p_git_out;
     close(FILE);
+    last;
   }
-  last;
 }
 
 if (! defined($p_git_close)) {
